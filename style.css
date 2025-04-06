@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(background.jpg) center/cover no-repeat;
+    overflow: hidden;
+}
+
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 100;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.loader-inner {
+    position: absolute;
+    border-radius: 50%;
+    border: 4px solid transparent;
+}
+.loader-inner:nth-child(1) {
+    border-top-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: spin 1.5s linear infinite;
+}
+.loader-inner:nth-child(2) {
+    border-top-color: rgba(255, 255, 255, 0.5);
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    animation: spinReverse 1.8s linear infinite;
+}
+.loader-inner:nth-child(3) {
+    border-top-color: rgba(255, 255, 255, 0.3);
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {    
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes spinReverse {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.loading-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Main Content Styles */
+.profile-card {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    gap: 30px;
+    color: white;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* Glass shine effect for card */
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0) 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.profile-card:hover::before {
+    transform: translateX(100%);
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.profile-card .image {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.profile-card .image:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.profile-card .profile-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    z-index: 2;
+}
+
+.profile-card .profile-content .name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.profile-card .profile-content .passion {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.profile-card .profile-content .bio {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.profile-card .profile-content .social-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-card .profile-content .social-links .social-link {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Shine effect for social links */
+.profile-card .profile-content .social-links .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.profile-card .profile-content .social-links .social-link:hover::before {
+    left: 100%;
+}
+
+.profile-card .profile-content .social-links .social-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.profile-card .profile-content .portfolio-link {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Shine effect for portfolio link */
+.profile-card .profile-content .portfolio-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.profile-card .profile-content .portfolio-link:hover::before {
+    left: 100%;
+}
+
+.profile-card .profile-content .portfolio-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .profile-card .profile-content {
+        align-items: center;
+    }
+}
